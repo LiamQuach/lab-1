@@ -1,6 +1,6 @@
 ---
 title: "Lab 1 - Quarto Warmup & STAT 331 Review"
-author: "YOUR NAME HERE"
+author: "LIAM QUACH"
 format: html
 embed-resources: true
 editor: source
@@ -125,16 +125,26 @@ two levels: `petrol` (any car using petrolium-based gas) and
 `alternative energy` (any car not using petrolium-based gas). 
 
 ```{r}
+mpg <- mpg |> 
+  mutate(fuel_type = if_else(fl %in% c("p", "d"), "petrol", "alternative energy"))
 
+head(mpg)
 ```
 
 12. The `drv` variable describes if the car has front drive (`f`), rear drive
 (`r`), or four wheel drive (`4`). Let's make better labels for these values! 
-Specifically, use the `case_when()` function to change the `drv` varible to have
+Specifically, use the `case_when()` function to change the `drv` variable to have
 the following levels: `front`, `rear`, `four wheel`. 
 
 ```{r}
-
+mpg <- mpg|> 
+  mutate(drv = case_when(
+    drv == 'f' ~ 'front',
+    drv == 'r' ~ 'rear',
+    drv == '4' ~ 'four wheel',
+    TRUE ~ drv  
+  ))
+head(mpg)
 ```
 
 (string split + remove extra ")" )
