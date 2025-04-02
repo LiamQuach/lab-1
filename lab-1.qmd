@@ -6,6 +6,7 @@ embed-resources: true
 editor: source
 execute: 
   echo: true
+  warning: false
 ---
 
 ```{r}
@@ -20,21 +21,26 @@ library(ggridges)
 First, let's make sure you know how to use Markdown formatting to style a Quarto
 document.
 
-1.  Make this text bold.
+1.  **Make this text bold.**
 
-2.  Make this text italicized.
+2.  *Make this text italicized.*
 
 3.  Make these into a bullet point list:
 
-Apples Bananas Potatoes
+-   Apples
+
+-   Bananas
+
+-   Potatoes
 
 4.  Edit the YAML to remove warning messages from being output in the rendered
 HTML file
 
-5.  Using code chunk options, make it so this chunk shows the plot but not the
-source code:
+5. Using code chunk options, make it so this chunk shows the plot but not the source code:
 
 ```{r}
+#| echo: false
+#| label: Box plot
 ggplot(data = mpg, 
        mapping = aes(y = manufacturer, x = hwy)) + 
   geom_boxplot() +
@@ -44,10 +50,11 @@ ggplot(data = mpg,
        )
 ```
 
-6.  Using code chunk options, remove the messages about bandwidth
-`geom_density_ridges()` chose to use:
+6. Using code chunk options, remove the messages about bandwidth geom_density_ridges() chose to use:
 
 ```{r}
+#| message: false
+#| label: Density plot
 ggplot(data = mpg, 
        mapping = aes(y = manufacturer, x = hwy)) + 
   geom_density_ridges() +
@@ -57,11 +64,12 @@ ggplot(data = mpg,
        )
 ```
 
-7.  Using code chunk options, make it so that these plots are printed
-side-by-side:
+7. Using code chunk options, make it so that these plots are printed side-by-side:
 
 ```{r}
-
+#| message: false
+#| layout-nrow: 1
+#| label: Box plot and density plot
 ggplot(data = mpg, 
        mapping = aes(y = manufacturer, x = hwy)) + 
   geom_boxplot() +
@@ -77,20 +85,21 @@ ggplot(data = mpg,
        y = "", 
        title = "Highway Milage (mpg) for Different Car Manufacturers"
        )
-
 ```
 
-8.  Using code chunk options, make it so this chunk shows the code but not the
-output:
+8. Using code chunk options, make it so this chunk shows the code but not the output:
 
 ```{r}
+#| output: false
+#| label: code but not output
 2 + 2
 ```
 
-9.  Using code chunk options, make it so the file can still knit even though
-this chunk has an error
+9. Using code chunk options, make it so the file can still knit even though this chunk has an error
 
 ```{r}
+#| eval: false
+#| label: knit with error
 2 + a
 ```
 
